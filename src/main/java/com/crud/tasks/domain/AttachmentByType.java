@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class AttachmentByType {
 
     @JsonProperty("trello")
-    private Trello trello;
+    private TrelloDto trello;
 
 }

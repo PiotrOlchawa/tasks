@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class Badges {
+public class BadgesDto {
 
     @JsonProperty("votes")
     int votes;

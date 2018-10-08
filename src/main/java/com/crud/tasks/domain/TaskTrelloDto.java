@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity(name= "tasks")
-public class Task {
+public class TaskTrelloDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

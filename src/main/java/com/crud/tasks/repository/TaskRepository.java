@@ -1,20 +1,20 @@
 package com.crud.tasks.repository;
 
-import com.crud.tasks.domain.Task;
+import com.crud.tasks.domain.TaskTrelloDto;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface TaskRepository extends CrudRepository<Task, Long> {
+public interface TaskRepository extends CrudRepository<TaskTrelloDto, Long> {
 
     @Override
-    List<Task> findAll();
+    List<TaskTrelloDto> findAll();
 
     @Override
-    Task save(Task task);
+    TaskTrelloDto save(TaskTrelloDto task);
 
-    Optional<Task> findById(Long id);
+    Optional<TaskTrelloDto> findById(Long id);
 
     void deleteById(Long id);
 
