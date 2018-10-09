@@ -37,8 +37,8 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
     }
-
-    @Test
+//##################################################################################################
+/*    @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
         // Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
@@ -56,7 +56,7 @@ public class TrelloClientTest {
         assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
         assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
         assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
-    }
+    }*/
 
 
     @Test
