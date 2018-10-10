@@ -38,7 +38,7 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloToken()).thenReturn("test");
     }
 /*//##################################################################################################
-*//*    @Test
+    @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
         // Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
