@@ -1,10 +1,9 @@
 package com.crud.tasks.trello.client;
 
-import com.crud.tasks.domain.BadgesDto;
 import com.crud.tasks.trello.config.TrelloConfig;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.domain.CreatedTrelloCardDto;
+import com.crud.tasks.domain.createdTrelloCard.CreatedTrelloCardDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;

@@ -1,6 +1,6 @@
 package com.crud.tasks.trello.client;
 
-import com.crud.tasks.domain.CreatedTrelloCardDto;
+import com.crud.tasks.domain.createdTrelloCard.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
@@ -31,12 +31,15 @@ public class TrelloClient {
 
     public List<TrelloBoardDto> getTrelloBoards() {
 
+        LOGGER.info(trelloconfig.getTrelloApiEndpoint());
+        //LOGGER.info(trelloconfig.getTrelloApiEndpoint() + "/members/" + trelloconfig.getUsername() + "/boards");
         URI url = UriComponentsBuilder.fromHttpUrl(trelloconfig.getTrelloApiEndpoint() + "/members/" + trelloconfig.getUsername() + "/boards")
                 .queryParam("key", trelloconfig.getTrelloAppKey())
                 .queryParam("token", trelloconfig.getTrelloToken())
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all")
                 .build().encode().toUri();
+        LOGGER.info(url.toString());
 
         try {
             TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);

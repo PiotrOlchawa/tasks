@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 //@NoArgsConstructor  to samo
 public class TaskDto {
 
+    private Long id;
+    private String title;
+    private String content;
+
     public TaskDto() {
     }
 
@@ -18,8 +22,4 @@ public class TaskDto {
         this.title = title;
         this.content = content;
     }
-
-    private long id;
-    private String title;
-    private String content;
 }
