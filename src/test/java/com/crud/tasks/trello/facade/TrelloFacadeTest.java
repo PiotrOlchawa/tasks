@@ -1,6 +1,5 @@
 package com.crud.tasks.trello.facade;
 
-import com.crud.tasks.config.TrelloConfig;
 import com.crud.tasks.domain.*;
 import com.crud.tasks.domain.createdTrelloCard.CreatedTrelloCardDto;
 import com.crud.tasks.mapper.TrelloMapper;

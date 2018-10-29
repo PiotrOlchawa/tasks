@@ -27,8 +27,11 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
-    public TaskDto getTask(@RequestParam Long taskId) throws TaskNotFoundException {
-        return taskMapper.mapToTaskDto(dbService.getTask(taskId).orElseThrow(TaskNotFoundException::new));
+    public TaskDto getTask(@RequestParam Long taskId) throws Exception {
+        //return taskMapper.mapToTaskDto(dbService.getTask(taskId).orElseThrow(TaskNotFoundException::new));
+        return taskMapper.mapToTaskDto(dbService.getTask(taskId).orElseThrow(Exception::new));
+
+
     }
 
     @Transactional
