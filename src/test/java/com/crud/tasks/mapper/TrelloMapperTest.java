@@ -1,10 +1,7 @@
 package com.crud.tasks.mapper;
 
+import com.crud.tasks.domain.*;
 import com.crud.tasks.trello.config.TrelloConfig;
-import com.crud.tasks.domain.TrelloBoard;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloList;
-import com.crud.tasks.domain.TrelloListDto;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,4 +109,36 @@ public class TrelloMapperTest {
         assertEquals(listTrelloList.get(0).getId(), listTrelloListDto.get(0).getId());
         assertEquals(listTrelloList.get(0).getName(), listTrelloListDto.get(0).getName());
     }
+
+    @Test
+    public void testTrelloMapperMapToCard() {
+        //Given
+        TrelloCardDto cardDto1 = new TrelloCardDto("name", "des", "top", "id");
+
+        //When
+        TrelloCard trelloCard = trelloMapper.mapToCard(cardDto1);
+
+        //Then
+        assertEquals("name", trelloCard.getName());
+        assertEquals("des", trelloCard.getDescription());
+        assertEquals("top", trelloCard.getPos());
+        assertEquals("id", trelloCard.getListId());
+    }
+
+    @Test
+    public void testTrelloMapperMapToCardDto() {
+        //Given
+        TrelloCard card1 = new TrelloCard("name", "des", "bottom", "id");
+
+        //When
+        TrelloCardDto trelloCardDto = trelloMapper.mapToCardDto(card1);
+
+        //Then
+        assertEquals("name", trelloCardDto.getName());
+        assertEquals("des", trelloCardDto.getDescription());
+        assertEquals("bottom", trelloCardDto.getPos());
+        assertEquals("id", trelloCardDto.getListId());
+    }
+
+
 }

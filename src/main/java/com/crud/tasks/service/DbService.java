@@ -11,23 +11,23 @@ import java.util.Optional;
 @Service
 public class DbService {
     @Autowired
-    private TaskRepository repository;
+    private TaskRepository taskRepository;
 
     public List<Task> getAllTasks() {
-        return repository.findAll();
+        return taskRepository.findAll();
     }
 
     public Optional<Task> getTask(final long id) {
-        return repository.findById(id);
+        return taskRepository.findById(id);
 
     }
 
     public Task saveTask(final Task task){
-        return repository.save(task);
+        return taskRepository.save(task);
     }
 
     public void deleteTask(final long id) {
-       repository.deleteById(id);
+       taskRepository.deleteById(id);
     }
 
 }
