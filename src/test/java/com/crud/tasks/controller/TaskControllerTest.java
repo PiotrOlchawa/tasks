@@ -69,19 +69,6 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void getTaskTest() throws Exception {
-        //given
-        TaskDto taskDto = new TaskDto(1L, "test", "test");
-        when(taskMapper.mapToTaskDto(dbService.getTask(1).orElse(new Task(1L, "enpty Task", "enpty Task")))).thenReturn(taskDto);
-        //when&Then
-        mockMvc.perform(get("/v1/task/getTask/?taskId=1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("test")))
-                .andExpect(jsonPath("$.content", is("test")));
-    }
-
-    @Test
     public void updateTaskTest() throws Exception {
         //given
         TaskDto taskDto = new TaskDto(1L, "test", "test");
@@ -101,7 +88,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void createTaskTest() throws Exception {
+    public void createTask() throws Exception {
         //given
         TaskDto taskDto = new TaskDto(1L, "test", "test");
         Gson gson = new Gson();
@@ -115,7 +102,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void shouldDeleteTask() throws Exception {
+    public void deleteTask() throws Exception {
         //given
         Task task = new Task(1L, "test11", "testing111");
 
@@ -127,35 +114,6 @@ public class TaskControllerTest {
         verifyNoMoreInteractions(dbService);
     }
 
-    @Test
-    public void shouldUpdatetask() throws Exception {
-        //given
-        Task task = new Task(1L, "Task", "Test_1");
-        TaskDto taskDto = new TaskDto(1L, "Task", "Test_1");
 
-
-        when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task);
-        when(dbService.saveTask(any(Task.class))).thenReturn(task);
-        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
-
-        Gson gson = new Gson();
-        String jsonContent = gson.toJson(taskDto);
-
-        //When & Then
-        mockMvc.perform(put("/v1/tasks", 1L).contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1")
-                .characterEncoding("UTF-8")
-                .content(jsonContent)
-        )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("Task")))
-                .andExpect(jsonPath("$.content", is("Test_1")));
-        verify(taskMapper, times(1)).mapToTaskDto(any(Task.class));
-        verify(taskMapper, times(1)).mapToTask(any(TaskDto.class));
-        verify(dbService, times(1)).saveTask(task);
-        verifyNoMoreInteractions(taskMapper);
-        verifyNoMoreInteractions(dbService);
-    }
 
 }
