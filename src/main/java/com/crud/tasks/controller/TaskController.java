@@ -34,6 +34,7 @@ public class TaskController {
 
     }
 
+
     @Transactional
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
     public void deleteTask(@RequestParam Long taskId) {

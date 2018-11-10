@@ -40,6 +40,11 @@ dependencies {
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	// https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml
+	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
+
+
 	//compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
