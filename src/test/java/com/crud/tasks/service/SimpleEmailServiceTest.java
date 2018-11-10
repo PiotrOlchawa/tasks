@@ -31,7 +31,8 @@ public class SimpleEmailServiceTest {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         //When
-        simpleEmailService.send(mail);
+        //simpleEmailService.send(mail);
+        simpleEmailService.send(mail, MailMessageType.NORMAL);
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
     }
@@ -46,7 +47,8 @@ public class SimpleEmailServiceTest {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         //When
-        simpleEmailService.send(mail);
+        //simpleEmailService.send(mail);
+        simpleEmailService.send(mail, MailMessageType.NORMAL);
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
     }

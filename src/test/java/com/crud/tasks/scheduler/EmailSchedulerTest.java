@@ -3,6 +3,7 @@ package com.crud.tasks.scheduler;
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.Mail;
 import com.crud.tasks.repository.TaskRepository;
+import com.crud.tasks.service.MailMessageType;
 import com.crud.tasks.service.SimpleEmailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +45,8 @@ public class EmailSchedulerTest {
         System.out.println();
 
         //Then
-        verify(simpleEmailService, times(1)).send(expected);
+        verify(simpleEmailService, times(1)).send(expected, MailMessageType.SCHEDULE);
+        //verify(simpleEmailService, times(1)).send(expected);
     }
 
 }
