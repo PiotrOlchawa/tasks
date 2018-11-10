@@ -7,35 +7,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SimpleEmailService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
 
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void send(final Mail mail) {
-        LOGGER.info("Starting email preparation");
+    @Autowired
+    private MailCreatorService mailCreatorService;
+
+    public void send(Mail mail, MailMessageType messageType) {
+
+        LOGGER.info("Starting email preparation...");
+
         try {
-            javaMailSender.send(createMailMessage(mail));
+            if (messageType.equals(MailMessageType.SCHEDULE)) {
+                javaMailSender.send(createMimeMessage(mail, MailMessageType.SCHEDULE));
+            } else {
+                javaMailSender.send(createMimeMessage(mail, MailMessageType.NORMAL));
+            }
             LOGGER.info("Email has been sent");
         } catch (MailException e) {
-            LOGGER.info("FAILED TO PROCESS EMAIL SENDING: ", e.getMessage(), e);
+            LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
+        }
+    }
+
+    private MimeMessagePreparator createMimeMessage(final Mail mail, final MailMessageType messageType) {
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setFrom("kodilla999@gmail.com");
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(getMessageFromTemplate(mail.getMessage(), messageType), true);
+            };
+    }
+
+    private String getMessageFromTemplate(final String message, final MailMessageType messageType) {
+        switch (messageType) {
+            case NORMAL:
+                return mailCreatorService.buildTrelloCardEmail(message);
+            case SCHEDULE:
+                return mailCreatorService.buildScheduleEmail(message);
+            default:
+                return message;
         }
     }
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
-        if (mail.getToCC() != null) {
-            mailMessage.setCc(mail.getToCC());
-        }
         mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
+        mailMessage.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()));
         return mailMessage;
     }
-
 }
