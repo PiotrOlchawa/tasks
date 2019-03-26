@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -95,9 +94,9 @@ public class TrelloControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-                .andExpect(jsonPath("$.id",is("323")))
-                .andExpect(jsonPath("$.name",is("Test")))
-                .andExpect(jsonPath("$.shortUrl",is("http://test.com")));
+                .andExpect(jsonPath("$.id", is("323")))
+                .andExpect(jsonPath("$.name", is("Test")))
+                .andExpect(jsonPath("$.shortUrl", is("http://test.com")));
 
     }
 
